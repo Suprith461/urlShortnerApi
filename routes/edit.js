@@ -1,7 +1,7 @@
 // import *as express from 'express'
 const validUrl = require('valid-url')
 
-const generateShortUrl =require('./../models/generateHash')
+
 const postUrl = require('./../models/postRequest') 
 const firebase = require("firebase")
 const express= require("express")
@@ -12,15 +12,14 @@ const router = express.Router();
 
 // @route     POST /api/url/shorten
 // @desc      Create short URL
-router.post('/shorten', async (req, res) => {
-  const { longUrl,uid,email } = req.query;
+router.post('/editurl', async (req, res) => {
+  const { longUrl,uid,email,urlCode} = req.query;
   
   const baseUrl = "http://localhost:5000";
 
   
 
-  //generate 7 bit hash
-  const urlCode = generateShortUrl(longUrl+'')
+  
 
   // Check long url
   if (validUrl.isUri(longUrl)) {
@@ -42,7 +41,7 @@ router.post('/shorten', async (req, res) => {
             expiry_date:"",
             visit_counts:0,
             countries:{
-             
+              "usa":0,"ind":0
             }
             
           };
